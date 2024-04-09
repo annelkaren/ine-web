@@ -572,7 +572,7 @@
         // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: [
           'Total',
-          'Net',
+          'PRI',
           'Gross',
           'AVG',
         ]
