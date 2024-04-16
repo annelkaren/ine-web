@@ -1,5 +1,6 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,14 @@ import { LoadingInterceptor } from './helpers/loading.interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastService } from './shared/services/toast-service';
 import { MessageService } from 'primeng/api';
+import { AddComponent } from './pages/shared/modals/add/add.component';
+import { ModalService } from './shared/services/modal-service';
+import { DialogService } from 'primeng/dynamicdialog';
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+import { FormularioService } from './shared/services/formulario-service';
 
 @NgModule({
   declarations: [
@@ -24,13 +33,17 @@ import { MessageService } from 'primeng/api';
     SidebarComponent,
     DashboardComponent,
     TablesComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     PrimeNgModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     [
@@ -39,7 +52,10 @@ import { MessageService } from 'primeng/api';
     ],
     DocumentoService,
     ToastService,
-    MessageService
+    MessageService,
+    DialogService,
+    ModalService,
+    FormularioService
   ],
   bootstrap: [AppComponent]
 })

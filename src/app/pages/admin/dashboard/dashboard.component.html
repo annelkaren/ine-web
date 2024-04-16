@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="home-tab">
-              <div class="tab-content tab-content-basic">
+              <div class="tab-content-basic">
                 <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
                   <div class="row">
                     <div class="col-lg-8 d-flex flex-column">
@@ -18,32 +18,32 @@
                               <div class="d-sm-flex justify-content-between align-items-start">
                                 <div>
                                   <button 
-                                    style="border: 1px solid #1F3BB3"
+                                  style="border: 1px solid #1F3BB3;"
                                     type="button" 
                                     (click)="refresh()" 
-                                    class="btn btn-inverse-primary btn-icon" 
+                                    class="btn btn-outline-secondary btn-icon" 
                                     pTooltip="Actualizar">
-                                    <i style="margin-right: 0rem;" class="mdi mdi-refresh"></i>
+                                    <i style="margin-right: 0rem; color: #1F3BB3;" class="mdi mdi-refresh"></i>
                                   </button>
                                   <button 
-                                    style="border: 1px solid #34B1AA"
+                                    style="border: 1px solid #34B1AA;"
                                     type="button" 
-                                    class="btn btn-inverse-success btn-icon space" 
+                                    (click)="add()"
+                                    class="btn btn-outline-secondary btn-icon space" 
                                     pTooltip="Agregar">
-                                    <i style="margin-right: 0rem;" class="mdi mdi-plus"></i>
+                                    <i style="margin-right: 0rem; color: #34B1AA;" class="mdi mdi-plus"></i>
                                   </button>
                                   <button 
-                                    style="border: 1px solid #F95F53"
+                                  style="border: 1px solid #F95F53;"
                                     type="button" 
-                                    class="btn btn-inverse-danger btn-icon space" 
+                                    class="btn btn-outline-secondary btn-icon space" 
                                     pTooltip="Eliminar">
-                                    <i style="margin-right: 0rem;" class="mdi mdi-delete"></i>
+                                    <i style="margin-right: 0rem; color: #F95F53;" class="mdi mdi-delete"></i>
                                   </button>
                                 </div>
-                                <p-selectButton (click)="click()" [options]="stateOptions" [(ngModel)]="value" optionLabel="label" optionValue="value"></p-selectButton>
+                                <p-selectButton (click)="filter()" [options]="stateOptions" [(ngModel)]="value" optionLabel="label" optionValue="value"></p-selectButton>
                               </div>
                               <div class="table-responsive  mt-1">
-
                                 <p-table [tableStyle]="{ 'min-width': '50rem', 'font-size': '0.9rem' }"
                                   [value]="documentos" dataKey="id" selectionMode="single"
                                   [(selection)]="selectedDocuments">
@@ -66,12 +66,12 @@
                                     </tr>
                                   </ng-template>
                                   <ng-template pTemplate="body" let-document>
-                                    <tr (click)="selectedDocument(document)">
+                                    <tr>
                                       <td>
                                         <p-tableCheckbox [value]="document"></p-tableCheckbox>
                                       </td>
-                                      <td>{{ document.clave }}</td>
-                                      <td>
+                                      <td (click)="editar(document)">{{ document.clave }}</td>
+                                      <td (click)="editar(document)">
                                         <div *ngIf="document.estatus === '1'" class="badge badge-opacity-danger">No
                                           iniciado</div>
                                         <div *ngIf="document.estatus === '2'" class="badge badge-opacity-warning">

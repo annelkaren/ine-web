@@ -8,7 +8,7 @@ import { TablesComponent } from './pages/admin/tables/tables.component';
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent },
-  { path: 'table', component: TablesComponent },
+  { path: 'form/:id', component: TablesComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 

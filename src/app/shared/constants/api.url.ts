@@ -7,3 +7,6 @@ export const URL_HOST = "http://localhost:8080/";
 export const PATH_DOCUMENTO = "documento";
 export const PATH_DOCUMENTO_FILTERS = "/geyByFilters";
 export const PATH_DOCUMENTO_COUNTER = "/counter";
+
+export const PATH_FORMULARIO = "formulario";
+export const PATH_FORMULARIO_GRAPHIC = "/graphic";

@@ -1,280 +1,244 @@
-<div class="content-wrapper">
-    <div class="row">
-      <div class="col-lg-6 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Basic Table</h4>
-            <p class="card-description">
-              Add class <code>.table</code>
-            </p>
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Profile</th>
-                    <th>VatNo.</th>
-                    <th>Created</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Jacob</td>
-                    <td>53275531</td>
-                    <td>12 May 2017</td>
-                    <td><label class="badge badge-danger">Pending</label></td>
-                  </tr>
-                  <tr>
-                    <td>Messsy</td>
-                    <td>53275532</td>
-                    <td>15 May 2017</td>
-                    <td><label class="badge badge-warning">In progress</label></td>
-                  </tr>
-                  <tr>
-                    <td>John</td>
-                    <td>53275533</td>
-                    <td>14 May 2017</td>
-                    <td><label class="badge badge-info">Fixed</label></td>
-                  </tr>
-                  <tr>
-                    <td>Peter</td>
-                    <td>53275534</td>
-                    <td>16 May 2017</td>
-                    <td><label class="badge badge-success">Completed</label></td>
-                  </tr>
-                  <tr>
-                    <td>Dave</td>
-                    <td>53275535</td>
-                    <td>20 May 2017</td>
-                    <td><label class="badge badge-warning">In progress</label></td>
-                  </tr>
-                </tbody>
-              </table>
+<div class="container-scroller">
+  <app-header></app-header>
+  <div class="container-fluid page-body-wrapper">
+    <app-sidebar class="sidebar"></app-sidebar>
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="home-tab">
+              <div class="tab-content-basic">
+                <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+                  <div class="row">
+                    <div class="col-lg-8 d-flex flex-column">
+                      <div class="row flex-grow">
+                        <div class="col-12 grid-margin stretch-card">
+                          <div class="card card-rounded">
+                            <div class="card-body">
+                              <div class="d-sm-flex justify-content-center align-items-center">
+                                <p-image *ngIf="documento.id == 0 || documento.isVoice" src="assets/images/no-document.jpg" alt="Image"
+                                  [preview]="true"></p-image>
+                                <p-image *ngIf="documento.id > 0 && !documento.isVoice" src="assets/images/acta.png" alt="Image"
+                                  [preview]="true"></p-image>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 d-flex flex-column">
+                      <div class="row">
+                        <div class="col-12 grid-margin stretch-card">
+                          <div class="card card-rounded">
+                            <div class="card-body">
+                              <div class="col-lg-12">
+                                <div class="d-flex justify-content-center align-items-center mb-3">
+                                  <h4 class="card-title card-title-dash">Resultados de la votación</h4>
+                                  <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button" 
+                                    (click)="save()">
+                                    <i class="mdi mdi-content-save"></i>Guardar</button>
+                                  &nbsp;
+                                  <button class="btn btn-secondary btn-lg text-white mb-0 me-0" type="button"
+                                    (click)="cancel()" style="color: black !important">
+                                    <i class="mdi mdi-close"></i>Cancelar</button>
+                                </div>
+                                <p-divider></p-divider>
+                                <br />
+                                <form [formGroup]="formControl" novalidate>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pan.png" width="40">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="pan"  maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pri.png" width="40">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="pri" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/prd.png" width="40">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="prd" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pt.png" width="40">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="morena" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/alianza.png" width="40">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="alianza" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/ci.png" width="40">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="ci" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <p-divider></p-divider>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/prd.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/alianza.png" width="33">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col1" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/prd.png" width="33">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col2" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/alianza.png" width="33">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col3" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/prd.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/alianza.png" width="33">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col4" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/prd.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/alianza.png" width="33">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col5" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/pri.png" width="33">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col6" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/prd.png" width="33">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col7" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/alianza.png" width="33">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col8" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/prd.png" width="33">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col9" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/alianza.png" width="33">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col10" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/prd.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/alianza.png" width="33">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col11" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <p-divider></p-divider>
+                                  <div class="row">
+                                    <div class="col-5" style="font-size: .8em;">
+                                      CANDIDATAS/OS NO REGISTRADAS/OS
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="col12" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5" style="font-size: .8em;">
+                                      VOTOS NULOS
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="nulos" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5" style="font-size: .8em;">
+                                      TOTAL
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber [max]="999" formControlName="total" maxlength="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-6 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Hoverable Table</h4>
-            <p class="card-description">
-              Add class <code>.table-hover</code>
-            </p>
-            <div class="table-responsive">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>User</th>
-                    <th>Product</th>
-                    <th>Sale</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Jacob</td>
-                    <td>Photoshop</td>
-                    <td class="text-danger"> 28.76% <i class="ti-arrow-down"></i></td>
-                    <td><label class="badge badge-danger">Pending</label></td>
-                  </tr>
-                  <tr>
-                    <td>Messsy</td>
-                    <td>Flash</td>
-                    <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
-                    <td><label class="badge badge-warning">In progress</label></td>
-                  </tr>
-                  <tr>
-                    <td>John</td>
-                    <td>Premier</td>
-                    <td class="text-danger"> 35.00% <i class="ti-arrow-down"></i></td>
-                    <td><label class="badge badge-info">Fixed</label></td>
-                  </tr>
-                  <tr>
-                    <td>Peter</td>
-                    <td>After effects</td>
-                    <td class="text-success"> 82.00% <i class="ti-arrow-up"></i></td>
-                    <td><label class="badge badge-success">Completed</label></td>
-                  </tr>
-                  <tr>
-                    <td>Dave</td>
-                    <td>53275535</td>
-                    <td class="text-success"> 98.05% <i class="ti-arrow-up"></i></td>
-                    <td><label class="badge badge-warning">In progress</label></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Striped Table</h4>
-            <p class="card-description">
-              Add class <code>.table-striped</code>
-            </p>
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>
-                      User
-                    </th>
-                    <th>
-                      First name
-                    </th>
-                    <th>
-                      Progress
-                    </th>
-                    <th>
-                      Amount
-                    </th>
-                    <th>
-                      Deadline
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="py-1">
-                      <img src="../../images/faces/face1.jpg" alt="image"/>
-                    </td>
-                    <td>
-                      Herman Beck
-                    </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td>
-                      $ 77.99
-                    </td>
-                    <td>
-                      May 15, 2015
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-1">
-                      <img src="../../images/faces/face2.jpg" alt="image"/>
-                    </td>
-                    <td>
-                      Messsy Adam
-                    </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td>
-                      $245.30
-                    </td>
-                    <td>
-                      July 1, 2015
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-1">
-                      <img src="../../images/faces/face3.jpg" alt="image"/>
-                    </td>
-                    <td>
-                      John Richards
-                    </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td>
-                      $138.00
-                    </td>
-                    <td>
-                      Apr 12, 2015
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-1">
-                      <img src="../../images/faces/face4.jpg" alt="image"/>
-                    </td>
-                    <td>
-                      Peter Meggik
-                    </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td>
-                      $ 77.99
-                    </td>
-                    <td>
-                      May 15, 2015
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-1">
-                      <img src="../../images/faces/face5.jpg" alt="image"/>
-                    </td>
-                    <td>
-                      Edward
-                    </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td>
-                      $ 160.25
-                    </td>
-                    <td>
-                      May 03, 2015
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-1">
-                      <img src="../../images/faces/face6.jpg" alt="image"/>
-                    </td>
-                    <td>
-                      John Doe
-                    </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td>
-                      $ 123.21
-                    </td>
-                    <td>
-                      April 05, 2015
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-1">
-                      <img src="../../images/faces/face7.jpg" alt="image"/>
-                    </td>
-                    <td>
-                      Henry Tom
-                    </td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                    <td>
-                      $ 150.00
-                    </td>
-                    <td>
-                      June 16, 2015
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+      <app-footer></app-footer>
     </div>
   </div>
+</div>

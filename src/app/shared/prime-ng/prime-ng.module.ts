@@ -9,6 +9,11 @@ import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { ListboxModule } from 'primeng/listbox';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { CardModule } from 'primeng/card';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ImageModule } from 'primeng/image';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   exports: [
@@ -20,7 +25,12 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     TableModule,
     PaginatorModule,
     ListboxModule,
-    SelectButtonModule
+    SelectButtonModule,
+    CardModule,
+    FileUploadModule,
+    ImageModule,
+    InputNumberModule,
+    DividerModule
   ]
 })
 export class PrimeNgModule { }
