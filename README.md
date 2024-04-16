@@ -1,2 +1,0 @@
-# testGit
-Repositorio de pruebas
