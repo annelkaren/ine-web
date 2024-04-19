@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 import { PATH_DOCUMENTO, PATH_DOCUMENTO_COUNTER, PATH_DOCUMENTO_FILTERS, PATH_FORMULARIO, PATH_FORMULARIO_GRAPHIC, URL_HOST } from "../constants/api.url";
 import { Page } from "../api-objects/page";
 import { PARAM_KEY, PARAM_PAGINATOR, PARAM_FILTER } from "../constants/constants";
@@ -55,6 +55,14 @@ export class DocumentoService {
     }
 
     public graphic(): Observable<Data> {
-        return this.http.get<Data>(URL_HOST + PATH_FORMULARIO + PATH_FORMULARIO_GRAPHIC)
+        return this.http.get<Data>(URL_HOST + PATH_FORMULARIO + PATH_FORMULARIO_GRAPHIC);
+    }
+
+    public saveFile(clave: string, file: any): Observable<String> {
+        const formData = new FormData();
+        formData.append("clave", clave);
+        formData.append("file", file);
+        return this.http.post<String>(URL_HOST + PATH_DOCUMENTO + "/files", formData);
+
     }
 }

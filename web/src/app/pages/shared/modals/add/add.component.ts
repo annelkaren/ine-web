@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { UploadEvent } from 'primeng/fileupload';
 import { Documento } from 'src/app/shared/api-objects/documento';
 import { ErrorResponse } from 'src/app/shared/api-objects/error-response';
 import { DocumentoService } from 'src/app/shared/services/documento-service';
@@ -16,9 +15,12 @@ import { displayFieldCss, getErrorMessage } from 'src/app/shared/utility-functio
 })
 export class AddComponent implements OnInit {
 
+  @ViewChild('fileUpload') fileUpload: any;
   public isVisible: boolean = false;
   public formControl: FormGroup = new FormGroup({});
   private documento: Documento = new Documento(undefined, 0, "", "", "1", false);
+  private file: any;
+  public disabledButton: boolean = true;
 
   constructor(
     private ref: DynamicDialogRef,
@@ -31,13 +33,11 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.formControl = this.formBuilder.group({
-      clave: ["", [Validators.required, Validators.minLength(3)]],
-      url: [""]
+      clave: ["", [Validators.required, Validators.minLength(3)]]
     });
 
     this.formControl.valueChanges.subscribe(data => {
       this.documento.clave = data.clave;
-      this.documento.url = data.url;
     });
   }
 
@@ -49,21 +49,28 @@ export class AddComponent implements OnInit {
     this.isVisible = false;
   }
 
-  public onUpload(event: UploadEvent) {
-    console.log(event);
+  public onSelect(event: any) {
+    this.disabledButton = false;
+    this.file = event.files[0];
+  }
+
+  public removeFile() {
+    this.fileUpload.clear();
+    this.disabledButton = true;
+    this.file = undefined;
   }
 
   public save() {
-    if (this.formControl.valid) {
-      this.documentoService.save(this.documento)
+    if (this.formControl.valid && this.file) {
+      this.documentoService.saveFile(this.documento.clave, this.file)
         .subscribe(response => {
-          this.toastService.showSuccessToast("El registro se ha guardado correctamente.");
           this.ref.close("ok");
+          this.toastService.showSuccessToast("El registro se ha guardado correctamente.");
         },
           (errorResponse: ErrorResponse) => {
             this.toastService.showErrorToast(getErrorMessage(errorResponse.error));
           });
-    } else{
+    } else {
       this.toastService.showErrorToast("Complete los campos faltantes");
     }
   }

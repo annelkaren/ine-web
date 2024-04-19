@@ -31,9 +31,28 @@
         <div class="flex flex-column">
             <div class="form-group col-md-12 col-lg-12 col-sm-12">
                 <label><b>Documento</b></label>
-                <p-fileUpload mode="basic" name="file" url="http://localhost:8080/documento/files"
-                    chooseLabel="Seleccionar archivo" accept="image/*" maxFileSize="1000000"
-                    (onUpload)="onUpload($event)"></p-fileUpload>
+                <div class="row">
+                    <div class="col-1 grid-margin stretch-card">
+                        <button 
+                        [disabled]="disabledButton"
+                        style="border: 1px solid #F95F53; padding:0.5rem .9rem"
+                        type="button" 
+                        (click)="removeFile()"
+                        class="btn btn-outline-secondary btn-icon space" 
+                        pTooltip="Borrar archivo seleccionado">
+                        <i style="margin-right: 0rem; color: #F95F53;" class="mdi mdi-delete"></i>
+                    </button>
+                    </div>
+                    <div class="col-11 grid-margin stretch-card">
+                        &nbsp;&nbsp;
+                        <p-fileUpload #fileUpload mode="basic" name="file"
+                        chooseLabel="Seleccionar archivo..."
+                        (onSelect)="onSelect($event)"
+                        accept=".pdf,.png,.jpg,.jpeg" maxFileSize="1000000"
+                        >
+                    </p-fileUpload>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
