@@ -24,6 +24,8 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { FormularioService } from './shared/services/formulario-service';
+import { NoValidComponent } from './pages/shared/modals/no-valid/no-valid.component';
+import { ValidateComponent } from './pages/shared/modals/validate/validate.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { FormularioService } from './shared/services/formulario-service';
     DashboardComponent,
     TablesComponent,
     SpinnerComponent,
-    AddComponent
+    AddComponent,
+    NoValidComponent,
+    ValidateComponent
   ],
   imports: [
     BrowserModule,

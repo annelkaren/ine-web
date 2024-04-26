@@ -12,7 +12,6 @@ import com.svi.app.dto.ResponseDTO;
 import com.svi.app.exception.DuplicityException;
 import com.svi.app.model.Documento;
 import com.svi.app.repository.DocumentoRepository;
-import com.svi.app.repository.FormularioRepository;
 import com.svi.app.service.DocumentoSRV;
 import com.svi.app.util.StaticsConstants;
 
@@ -23,8 +22,6 @@ public class DocumentoSRVImpl implements DocumentoSRV {
 
 	@Autowired
 	private DocumentoRepository documentoRepository;
-	@Autowired
-	private FormularioRepository formularioRepository;
 
 	@Override
 	public Page<Documento> findAll(Integer filter, Pageable pageable) {

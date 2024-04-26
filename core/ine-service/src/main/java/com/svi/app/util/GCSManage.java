@@ -50,7 +50,7 @@ public class GCSManage {
 		System.out.println("File uploaded to bucket " + bucketName + " as " + objectName);
 	}
 
-	public static void downloadObject() {
+	public static Blob downloadObject(String name) {
 		// The ID of your GCP project
 		String projectId = "striped-sight-179217";
 
@@ -58,10 +58,10 @@ public class GCSManage {
 		String bucketName = "ventanilla-web-bucket";
 
 		// The ID of your GCS object
-		String objectName = "ine/196194362-7687-45AB-9718-EA4021C1C629.jpeg";
+		String objectName = "ine/" + name;
 
 		// The path to which the file should be downloaded
-		String destFilePath = "/Users/ann/ine/files/GCS.jpeg";
+		String destFilePath = "/Users/ann/ine/files/" + name;
 
 		Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
 
@@ -70,5 +70,6 @@ public class GCSManage {
 
 		System.out
 				.println("Downloaded object " + objectName + " from bucket name " + bucketName + " to " + destFilePath);
+		return blob;
 	}
 }

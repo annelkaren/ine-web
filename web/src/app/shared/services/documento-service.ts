@@ -1,12 +1,13 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, map } from "rxjs";
+import { Observable } from "rxjs";
 import { PATH_DOCUMENTO, PATH_DOCUMENTO_COUNTER, PATH_DOCUMENTO_FILTERS, PATH_FORMULARIO, PATH_FORMULARIO_GRAPHIC, URL_HOST } from "../constants/api.url";
 import { Page } from "../api-objects/page";
 import { PARAM_KEY, PARAM_PAGINATOR, PARAM_FILTER } from "../constants/constants";
 import { Counter } from "../api-objects/counter";
 import { Documento } from "../api-objects/documento";
 import { Data } from "../api-objects/data";
+import { SimpleObject } from "../api-objects/simple-object";
 
 @Injectable()
 export class DocumentoService {
@@ -63,6 +64,9 @@ export class DocumentoService {
         formData.append("clave", clave);
         formData.append("file", file);
         return this.http.post<String>(URL_HOST + PATH_DOCUMENTO + "/files", formData);
+    }
 
+    public getFile(filename: string): Observable<SimpleObject> {
+        return this.http.get<SimpleObject>(URL_HOST + PATH_DOCUMENTO + "/file/" + filename);
     }
 }

@@ -15,11 +15,22 @@
                         <div class="col-12 grid-margin stretch-card">
                           <div class="card card-rounded">
                             <div class="card-body">
+                              <div>
+                                <img 
+                                  style="display: block; margin-left: auto; margin-right: auto;" 
+                                  *ngIf="documento.id == 0 || documento.isVoice" 
+                                  alt="Image" 
+                                  src="assets/images/no-document.jpg">
+                              </div>
                               <div class="d-sm-flex justify-content-center align-items-center">
-                                <p-image *ngIf="documento.id == 0 || documento.isVoice" src="assets/images/no-document.jpg" alt="Image"
-                                  [preview]="true"></p-image>
-                                <p-image *ngIf="documento.id > 0 && !documento.isVoice" src="assets/images/acta.png" alt="Image"
-                                  [preview]="true"></p-image>
+                                <img #image>
+                                <iframe
+                                    #pdf
+                                    frameBorder="0"
+                                    scrolling="auto"
+                                    width="100%"
+                                    height="1100px">
+                                </iframe>
                               </div>
                             </div>
                           </div>

@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Documento } from 'src/app/shared/api-objects/documento';
 import { ErrorResponse } from 'src/app/shared/api-objects/error-response';
 import { Formulario } from 'src/app/shared/api-objects/formulario';
 import { DocumentoService } from 'src/app/shared/services/documento-service';
 import { FormularioService } from 'src/app/shared/services/formulario-service';
+import { ModalService } from 'src/app/shared/services/modal-service';
 import { ToastService } from 'src/app/shared/services/toast-service';
 import { getErrorMessage } from 'src/app/shared/utility-functions';
 
@@ -20,6 +22,10 @@ export class TablesComponent implements OnInit {
   public formulario: Formulario = new Formulario(0, 0, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
   public documento: Documento = new Documento(0, 0, "", "", "", false);
   public formulario2: Formulario;
+  public data: boolean = false;
+  @ViewChild('pdf') pdf!: ElementRef;
+  @ViewChild('image') image!: ElementRef;
+  @ViewChild('noImage') noImage!: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,7 +33,9 @@ export class TablesComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastService: ToastService,
     private formularioService: FormularioService,
-    private documentoService: DocumentoService
+    private documentoService: DocumentoService,
+    private modalService: ModalService
+
   ) {
     let id: number = 0;
     this.route.params.subscribe(params => {
@@ -43,6 +51,7 @@ export class TablesComponent implements OnInit {
       this.documentoService.getById(id).then(result => {
         if (result) {
           this.documento = result;
+          this.getFile(this.documento.url);
         }
       });
     }
@@ -65,9 +74,20 @@ export class TablesComponent implements OnInit {
         if (this.documento.id == 0 || this.documento.estatus == "1") {//nuevo
           this.saveForm();
         } else {//valida
-          if(this.validateForm()){
-            console.log("Si son los mismos");
+          if (this.validateForm()) {
             this.updateForm();
+          } else {
+            let ref: DynamicDialogRef = this.modalService.noValid();
+            ref.onClose.subscribe((data) => {
+              if (data === 'ok') {
+                let ref: DynamicDialogRef = this.modalService.valid();
+                ref.onClose.subscribe((data) => {
+                  if (data === 'ok') {
+                    console.log("GUARDA DIFERENTES");
+                  }
+                });
+              }
+            });
           }
         }
       }
@@ -177,5 +197,18 @@ export class TablesComponent implements OnInit {
       this.formulario.nulos = data.nulos;
       this.formulario.total = data.total;
     });
+  }
+
+  public getFile(filename: string): any {
+    this.documentoService.getFile(filename)
+      .subscribe(response => {
+        if (response.name.includes("pdf")) {
+          this.pdf.nativeElement.src = "data:application/pdf;base64, " + response.value;
+          this.image.nativeElement.hidden = true;
+        } else {
+          this.pdf.nativeElement.hidden = true;
+          this.image.nativeElement.src = "data:image/png;base64, " + response.value;
+        }
+      });
   }
 }

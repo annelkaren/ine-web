@@ -2,6 +2,7 @@ package com.svi.app.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -34,16 +35,23 @@ public class CommonMethods {
 		return newPassword;
 	}
 
-	public static String compressionAndUploadFile(String name) {
+	public static String compressionAndUploadFile(InputStream file, String name) {
 		Path path = Paths.get(System.getProperty("user.home"), "ine", "files");
-		File input = new File(path.toAbsolutePath().toString() + "/" + name);
-		File output = new File(path.toAbsolutePath().toString() + "/1" + name);
 
+		String finalName = "1" + name;
 		try {
-			Thumbnails.of(input).scale(1).outputQuality(0.5).toFile(output);
-			Files.deleteIfExists(path.resolve(name));
-			GCSManage.uploadObject("1" + name);
-			return "1" + name;
+			if (!name.endsWith(".pdf")) {
+				Files.copy(file, path.resolve(name));
+				File input = new File(path.toAbsolutePath().toString() + "/" + name);
+				File output = new File(path.toAbsolutePath().toString() + "/" + finalName);
+				Thumbnails.of(input).scale(1).outputQuality(0.5).toFile(output);
+				Files.deleteIfExists(path.resolve(name));
+			} else {
+				Files.copy(file, path.resolve(finalName));
+			}
+			GCSManage.uploadObject(finalName);
+			Files.deleteIfExists(path.resolve(finalName));
+			return finalName;
 		} catch (IOException e) {
 			LOG.error("compressionAndUploadFile", e);
 			return "";
