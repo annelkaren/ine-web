@@ -1,10 +1,15 @@
 Por favor ingrese la contraseña para guardar el formulario.
+<br/><br/>
+<div class="form-group col-md-12 col-lg-12 col-sm-12">
+    <label><b>Contraseña: </b></label>
+    <input type="password" [(ngModel)]="password" class="form-control" placeholder='Contraseña'>
+</div>
 <div class="p-dialog-footer app-dialog-footer">
     <button class="btn btn-block btn-secondary font-weight-medium auth-form-btn" type="submit" (click)="close()">
         Cancelar
     </button>
     &nbsp;
-    <button class="btn btn-block btn-primary font-weight-medium auth-form-btn" type="submit" (click)="aprobar()">
+    <button class="btn btn-block btn-primary font-weight-medium auth-form-btn" type="submit" (click)="validar()">
         Guardar
     </button>
 </div>

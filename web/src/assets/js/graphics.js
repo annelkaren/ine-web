@@ -1,19 +1,17 @@
-export const printDoughnutChart = function (w, x, y, z) {
+export const printDoughnutChart = function (w, x, z) {
     if ($("#doughnutChart").length) {
         var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
         var doughnutPieData = {
           datasets: [{
-            data: [w, x, y, z],
+            data: [w, x, z],
             backgroundColor: [
               "#F95F53",
               "#fff2d6",
-              "#52CDFF",
               "#81DADA"
             ],
             borderColor: [
               "#F95F53",
               "#fff2d6",
-              "#52CDFF",
               "#81DADA"
             ],
           }],
@@ -22,7 +20,6 @@ export const printDoughnutChart = function (w, x, y, z) {
           labels: [
             'No iniciado',
             'Captura 1',
-            'Captura 2',
             'Validado',
           ]
         };
@@ -91,7 +88,7 @@ export const printDoughnutChart = function (w, x, y, z) {
       var leaveReportData = {
           labels: ["PAN","PRI", "PRD", "Morena", "Alianza", "CI"],
           datasets: [{
-              label: 'Last week',
+              label: 'Votos',
               data: [u, v, w, x, y, z],
               backgroundColor: "#52CDFF",
               borderColor: [

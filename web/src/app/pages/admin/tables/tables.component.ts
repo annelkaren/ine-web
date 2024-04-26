@@ -83,7 +83,7 @@ export class TablesComponent implements OnInit {
                 let ref: DynamicDialogRef = this.modalService.valid();
                 ref.onClose.subscribe((data) => {
                   if (data === 'ok') {
-                    console.log("GUARDA DIFERENTES");
+                    this.updateForm();
                   }
                 });
               }

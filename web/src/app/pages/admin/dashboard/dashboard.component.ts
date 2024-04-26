@@ -80,14 +80,16 @@ export class DashboardComponent implements OnInit {
   }
 
   public editar(document: any): void {
-    this.router.navigate(['/form/', document.id]);
+    if(!document.isVoice && document.estatus != '4') {
+      this.router.navigate(['/form/', document.id]);
+    }
   }
 
   public counter(): void {
     this.documentoService.counter()
       .subscribe(response => {
         this.counterO = response;
-        printDoughnutChart(this.counterO.noIniciado, this.counterO.captura1, this.counterO.captura2, this.counterO.validado);
+        printDoughnutChart(this.counterO.noIniciado, this.counterO.captura1, this.counterO.validado);
       },
         (errorResponse: ErrorResponse) => {
           this.toastService.showErrorToast(errorResponse.error);
