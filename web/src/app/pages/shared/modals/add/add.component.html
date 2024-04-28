@@ -48,7 +48,7 @@
                         <p-fileUpload #fileUpload mode="basic" name="file"
                         chooseLabel="Seleccionar archivo..."
                         (onSelect)="onSelect($event)"
-                        accept=".pdf,.png,.jpg,.jpeg" maxFileSize="2000000"
+                        accept=".pdf,.png,.jpg,.jpeg" [maxFileSize]="2000000"
                         >
                     </p-fileUpload>
                     </div>
