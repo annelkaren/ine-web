@@ -60,16 +60,14 @@ public class GCSManage {
 		// The ID of your GCS object
 		String objectName = "ine/" + name;
 
-		// The path to which the file should be downloaded
-		String destFilePath = "/Users/ann/ine/files/" + name;
-
 		Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
 
 		Blob blob = storage.get(BlobId.of(bucketName, objectName));
-		blob.downloadTo(Paths.get(destFilePath));
+		// The path to which the file should be downloaded
+		blob.downloadTo(Paths.get(System.getProperty("user.home"), "ine", "files").resolve(name));
 
 		System.out
-				.println("Downloaded object " + objectName + " from bucket name " + bucketName + " to " + destFilePath);
+				.println("Downloaded object " + objectName + " from bucket name " + bucketName + " to local repo");
 		return blob;
 	}
 }
