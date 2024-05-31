@@ -31,14 +31,26 @@ public class Formulario {
 	@Column(name = "prd")
 	private String prd;
 	
+	@Column(name = "pt")
+	private String pt;
+	
+	@Column(name = "pv")
+	private String pv;
+	
+	@Column(name = "mc")
+	private String mc;
+	
+	@Column(name = "psi")
+	private String psi;
+	
 	@Column(name = "morena")
 	private String morena;
 	
 	@Column(name = "alianza")
 	private String alianza;
 	
-	@Column(name = "ci")
-	private String ci;
+	@Column(name = "fm")
+	private String fm;
 	
 	@Column(name = "col_1")
 	private String col1;
@@ -52,33 +64,12 @@ public class Formulario {
 	@Column(name = "col_4")
 	private String col4;
 	
-	@Column(name = "col_5")
-	private String col5;
-	
-	@Column(name = "col_6")
-	private String col6;
-	
-	@Column(name = "col_7")
-	private String col7;
-	
-	@Column(name = "col_8")
-	private String col8;
-	
-	@Column(name = "col_9")
-	private String col9;
-	
-	@Column(name = "col_10")
-	private String col10;
-	
-	@Column(name = "col_11")
-	private String col11;
-	
-	@Column(name = "col_12")
-	private String col12;
-	
 	@Column(name = "nulos")
 	private String nulos;
 	
 	@Column(name = "total")
 	private String total;
+	
+	@Column(name = "counter")
+	private int counter;
 }

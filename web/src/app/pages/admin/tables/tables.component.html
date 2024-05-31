@@ -56,6 +56,15 @@
                                 <p-divider></p-divider>
                                 <br />
                                 <form [formGroup]="formControl" novalidate>
+                                  <div class="row" *ngIf="documento.id == 0">
+                                    <div class="col-5">
+                                      <label>Clave</label>
+                                    </div>
+                                    <div class="col-7">
+                                      <input pInputText formControlName="col4" tooltipPosition="top" pTooltip="Sección + No. de casilla + Tipo (18001B)"  placeholder="Ejemplo 18001B" [maxlength]="6"/>
+
+                                    </div>
+                                  </div>
                                   <div class="row">
                                     <div class="col-5">
                                       <img src="assets/images/partidos/pan.png" width="40">
@@ -85,6 +94,38 @@
                                       <img src="assets/images/partidos/pt.png" width="40">
                                     </div>
                                     <div class="col-7">
+                                      <p-inputNumber formControlName="pt" [maxlength]="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/pv.png" width="40">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="pv" [maxlength]="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/mv.png" width="40">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="mc" [maxlength]="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/psi.png" width="40">
+                                    </div>
+                                    <div class="col-7">
+                                      <p-inputNumber formControlName="psi" [maxlength]="3"> </p-inputNumber>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-5">
+                                      <img src="assets/images/partidos/morena.png" width="40">
+                                    </div>
+                                    <div class="col-7">
                                       <p-inputNumber formControlName="morena" [maxlength]="3"> </p-inputNumber>
                                     </div>
                                   </div>
@@ -98,10 +139,10 @@
                                   </div>
                                   <div class="row">
                                     <div class="col-5">
-                                      <img src="assets/images/partidos/ci.png" width="40">
+                                      <img src="assets/images/partidos/fm.png" width="40">
                                     </div>
                                     <div class="col-7">
-                                      <p-inputNumber formControlName="ci" [maxlength]="3"> </p-inputNumber>
+                                      <p-inputNumber formControlName="fm" [maxlength]="3"> </p-inputNumber>
                                     </div>
                                   </div>
                                   <p-divider></p-divider>
@@ -110,7 +151,6 @@
                                       <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
                                       <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
                                       <img src="assets/images/partidos/prd.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/alianza.png" width="33">
                                     </div>
                                     <div class="col-7">
                                       <p-inputNumber formControlName="col1" [maxlength]="3"> </p-inputNumber>
@@ -118,96 +158,12 @@
                                   </div>
                                   <div class="row">
                                     <div class="col-5">
-                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/prd.png" width="33">
+                                      <img src="assets/images/partidos/morena.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/pt.png" width="33" style="margin-right: 2px;">
+                                      <img src="assets/images/partidos/fm.png" width="33">
                                     </div>
                                     <div class="col-7">
                                       <p-inputNumber formControlName="col2" [maxlength]="3"> </p-inputNumber>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-5">
-                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/alianza.png" width="33">
-                                    </div>
-                                    <div class="col-7">
-                                      <p-inputNumber formControlName="col3" [maxlength]="3"> </p-inputNumber>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-5">
-                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/prd.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/alianza.png" width="33">
-                                    </div>
-                                    <div class="col-7">
-                                      <p-inputNumber formControlName="col4" [maxlength]="3"> </p-inputNumber>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-5">
-                                      <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/prd.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/alianza.png" width="33">
-                                    </div>
-                                    <div class="col-7">
-                                      <p-inputNumber formControlName="col5" [maxlength]="3"> </p-inputNumber>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-5">
-                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/pri.png" width="33">
-                                    </div>
-                                    <div class="col-7">
-                                      <p-inputNumber formControlName="col6" [maxlength]="3"> </p-inputNumber>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-5">
-                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/prd.png" width="33">
-                                    </div>
-                                    <div class="col-7">
-                                      <p-inputNumber formControlName="col7" [maxlength]="3"> </p-inputNumber>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-5">
-                                      <img src="assets/images/partidos/pan.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/alianza.png" width="33">
-                                    </div>
-                                    <div class="col-7">
-                                      <p-inputNumber formControlName="col8" [maxlength]="3"> </p-inputNumber>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-5">
-                                      <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/prd.png" width="33">
-                                    </div>
-                                    <div class="col-7">
-                                      <p-inputNumber formControlName="col9" [maxlength]="3"> </p-inputNumber>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-5">
-                                      <img src="assets/images/partidos/pri.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/alianza.png" width="33">
-                                    </div>
-                                    <div class="col-7">
-                                      <p-inputNumber formControlName="col10" [maxlength]="3"> </p-inputNumber>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-5">
-                                      <img src="assets/images/partidos/prd.png" width="33" style="margin-right: 2px;">
-                                      <img src="assets/images/partidos/alianza.png" width="33">
-                                    </div>
-                                    <div class="col-7">
-                                      <p-inputNumber formControlName="col11" [maxlength]="3"> </p-inputNumber>
                                     </div>
                                   </div>
                                   <p-divider></p-divider>
@@ -216,7 +172,7 @@
                                       CANDIDATAS/OS NO REGISTRADAS/OS
                                     </div>
                                     <div class="col-7">
-                                      <p-inputNumber formControlName="col12" [maxlength]="3"> </p-inputNumber>
+                                      <p-inputNumber formControlName="col3" [maxlength]="3"> </p-inputNumber>
                                     </div>
                                   </div>
                                   <div class="row">
@@ -232,7 +188,7 @@
                                       TOTAL
                                     </div>
                                     <div class="col-7">
-                                      <p-inputNumber [max]="999" formControlName="total" [maxlength]="3"> </p-inputNumber>
+                                      <p-inputNumber [max]="999" formControlName="total" [maxlength]="3"></p-inputNumber>
                                     </div>
                                   </div>
                                 </form>

@@ -2,14 +2,14 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Documento } from 'src/app/shared/api-objects/documento';
-import { ErrorResponse } from 'src/app/shared/api-objects/error-response';
-import { Formulario } from 'src/app/shared/api-objects/formulario';
-import { DocumentoService } from 'src/app/shared/services/documento-service';
-import { FormularioService } from 'src/app/shared/services/formulario-service';
-import { ModalService } from 'src/app/shared/services/modal-service';
-import { ToastService } from 'src/app/shared/services/toast-service';
-import { getErrorMessage } from 'src/app/shared/utility-functions';
+import { Formulario } from '../../../shared/api-objects/formulario';
+import { Documento } from '../../../shared/api-objects/documento';
+import { ToastService } from '../../../shared/services/toast-service';
+import { ModalService } from '../../../shared/services/modal-service';
+import { FormularioService } from '../../../shared/services/formulario-service';
+import { DocumentoService } from '../../../shared/services/documento-service';
+import { ErrorResponse } from '../../../shared/api-objects/error-response';
+import { getErrorMessage } from '../../../shared/utility-functions';
 
 @Component({
   selector: 'app-tables',
@@ -19,8 +19,8 @@ export class TablesComponent implements OnInit {
 
   public id: number = 0;
   public formControl: FormGroup = new FormGroup({});
-  public formulario: Formulario = new Formulario(0, 0, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
-  public documento: Documento = new Documento(0, 0, "", "", "", false);
+  public formulario: Formulario = new Formulario(0, 0, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", 0);
+  public documento: Documento = new Documento(0, 0, "", "", "", false, 0);
   public formulario2: Formulario;
   public data: boolean = false;
   @ViewChild('pdf') pdf!: ElementRef;
@@ -69,25 +69,37 @@ export class TablesComponent implements OnInit {
   public save(): void {
     if (this.formControl.valid) {
       if (this.formulario.total === "0") {
-        this.toastService.showErrorToast("Igrese el total de votos");
+        this.toastService.showErrorToast("Igrese votos");
       } else {
-        if (this.documento.id == 0 || this.documento.estatus == "1") {//nuevo
+        if (this.documento.id == 0) {//nuevo voz
+          if(this.formulario.col4) {//si tiene clave
+            this.saveForm();
+          } else { //No tiene
+            this.toastService.showErrorToast("Agrege una clave");
+          }
+        } else if(this.documento.estatus == "1"){ //nuevo documento
           this.saveForm();
         } else {//valida
           if (this.validateForm()) {
             this.updateForm();
           } else {
-            let ref: DynamicDialogRef = this.modalService.noValid();
-            ref.onClose.subscribe((data) => {
-              if (data === 'ok') {
-                let ref: DynamicDialogRef = this.modalService.valid();
-                ref.onClose.subscribe((data) => {
-                  if (data === 'ok') {
-                    this.updateForm();
-                  }
-                });
-              }
-            });
+            if (this.documento.counter < 3) {
+              this.formulario.counter = this.documento.counter + 1; 
+              this.updateForm();
+            } else {
+              this.formulario.counter = 5; 
+              let ref: DynamicDialogRef = this.modalService.noValid();
+              ref.onClose.subscribe((data) => {
+                if (data === 'ok') {
+                  let ref: DynamicDialogRef = this.modalService.valid();
+                  ref.onClose.subscribe((data) => {
+                    if (data === 'ok') {
+                      this.updateForm();
+                    }
+                  });
+                }
+              });
+            }
           }
         }
       }
@@ -125,24 +137,19 @@ export class TablesComponent implements OnInit {
     counter += this.isValid(this.formulario.pan, this.formulario2.pan);
     counter += this.isValid(this.formulario.pri, this.formulario2.pri);
     counter += this.isValid(this.formulario.prd, this.formulario2.prd);
+    counter += this.isValid(this.formulario.pt, this.formulario2.pt);
+    counter += this.isValid(this.formulario.pv, this.formulario2.pv);
+    counter += this.isValid(this.formulario.mc, this.formulario2.mc);
+    counter += this.isValid(this.formulario.psi, this.formulario2.psi);
     counter += this.isValid(this.formulario.morena, this.formulario2.morena);
     counter += this.isValid(this.formulario.alianza, this.formulario2.alianza);
-    counter += this.isValid(this.formulario.ci, this.formulario2.ci);
+    counter += this.isValid(this.formulario.fm, this.formulario2.fm);
     counter += this.isValid(this.formulario.col1, this.formulario2.col1);
     counter += this.isValid(this.formulario.col2, this.formulario2.col2);
     counter += this.isValid(this.formulario.col3, this.formulario2.col3);
-    counter += this.isValid(this.formulario.col4, this.formulario2.col4);
-    counter += this.isValid(this.formulario.col5, this.formulario2.col5);
-    counter += this.isValid(this.formulario.col6, this.formulario2.col6);
-    counter += this.isValid(this.formulario.col7, this.formulario2.col7);
-    counter += this.isValid(this.formulario.col8, this.formulario2.col8);
-    counter += this.isValid(this.formulario.col9, this.formulario2.col9);
-    counter += this.isValid(this.formulario.col10, this.formulario2.col10);
-    counter += this.isValid(this.formulario.col11, this.formulario2.col11);
-    counter += this.isValid(this.formulario.col12, this.formulario2.col12);
     counter += this.isValid(this.formulario.nulos, this.formulario2.nulos);
     counter += this.isValid(this.formulario.total, this.formulario2.total);
-    return counter == 20;
+    return counter == 15;
   }
 
   private isValid(field1: string, field2: string): number {
@@ -151,26 +158,22 @@ export class TablesComponent implements OnInit {
 
   public createForm(): void {
     this.formControl = this.formBuilder.group({
+      col4: [""],
       pan: [0, [Validators.required, Validators.minLength(1)]],
       pri: [0, [Validators.required, Validators.minLength(1)]],
       prd: [0, [Validators.required, Validators.minLength(1)]],
+      pt: [0, [Validators.required, Validators.minLength(1)]],
+      pv: [0, [Validators.required, Validators.minLength(1)]],
+      mc: [0, [Validators.required, Validators.minLength(1)]],
+      psi: [0, [Validators.required, Validators.minLength(1)]],
       morena: [0, [Validators.required, Validators.minLength(1)]],
       alianza: [0, [Validators.required, Validators.minLength(1)]],
-      ci: [0, [Validators.required, Validators.minLength(1)]],
+      fm: [0, [Validators.required, Validators.minLength(1)]],
       col1: [0, [Validators.required, Validators.minLength(1)]],
       col2: [0, [Validators.required, Validators.minLength(1)]],
       col3: [0, [Validators.required, Validators.minLength(1)]],
-      col4: [0, [Validators.required, Validators.minLength(1)]],
-      col5: [0, [Validators.required, Validators.minLength(1)]],
-      col6: [0, [Validators.required, Validators.minLength(1)]],
-      col7: [0, [Validators.required, Validators.minLength(1)]],
-      col8: [0, [Validators.required, Validators.minLength(1)]],
-      col9: [0, [Validators.required, Validators.minLength(1)]],
-      col10: [0, [Validators.required, Validators.minLength(1)]],
-      col11: [0, [Validators.required, Validators.minLength(1)]],
-      col12: [0, [Validators.required, Validators.minLength(1)]],
       nulos: [0, [Validators.required, Validators.minLength(1)]],
-      total: [0, [Validators.required, Validators.minLength(1)]],
+      total: [{ value: 0, disabled: true }, [Validators.required, Validators.minLength(1)]],
     });
   }
 
@@ -179,23 +182,23 @@ export class TablesComponent implements OnInit {
       this.formulario.pan = data.pan;
       this.formulario.pri = data.pri;
       this.formulario.prd = data.prd;
+      this.formulario.pt = data.pt;
+      this.formulario.pv = data.pv;
+      this.formulario.mc = data.mc;
+      this.formulario.psi = data.psi;
       this.formulario.morena = data.morena;
       this.formulario.alianza = data.alianza;
-      this.formulario.ci = data.ci;
+      this.formulario.fm = data.fm;
       this.formulario.col1 = data.col1;
       this.formulario.col2 = data.col2;
       this.formulario.col3 = data.col3;
-      this.formulario.col4 = data.col4;
-      this.formulario.col5 = data.col5;
-      this.formulario.col6 = data.col6;
-      this.formulario.col7 = data.col7;
-      this.formulario.col8 = data.col8;
-      this.formulario.col9 = data.col9;
-      this.formulario.col10 = data.col10;
-      this.formulario.col11 = data.col11;
-      this.formulario.col12 = data.col12;
       this.formulario.nulos = data.nulos;
       this.formulario.total = data.total;
+      this.formulario.col4 = data.col4;
+      let total = data.pan + data.pri + data.prd + data.pt + data.pv + data.mc + data.psi + data.morena + data.alianza;
+      total += data.fm + data.col1 + data.col2 + data.col3 + data.nulos;
+      this.formControl.controls['total'].setValue(total);
+      this.formulario.total = total;
     });
   }
 

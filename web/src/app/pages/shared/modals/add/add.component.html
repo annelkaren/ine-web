@@ -24,8 +24,41 @@
     <form [formGroup]="formControl" novalidate>
         <div class="flex flex-column">
             <div class="form-group col-md-12 col-lg-12 col-sm-12">
-                <label><b>Clave</b></label>
-                <input formControlName="clave" type="text" class="form-control" placeholder='Clave' [ngClass]="displayFieldCss('clave')">
+                <div class="row">
+                <div class="form-group col-md-4 col-lg-4 col-sm-4">
+                    <label><b>Sección</b></label>
+                    <select formControlName="clave" class="form-control select-color" [ngClass]="displayFieldCss('clave')" placeholder="Seleccionar...">
+                        <option selected value="0">Seleccionar ...</option>
+                        <option *ngFor="let section of array" [value]="section.seccion">
+                            {{ section.seccion }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4 col-lg-4 col-sm-4">
+                    <label><b>Número de casilla</b></label>
+                    <select formControlName="casilla" class="form-control select-color" [ngClass]="displayFieldCss('casilla')" placeholder="Seleccionar...">
+                        <option selected value="0">Seleccionar ...</option>
+                        <option value="1"> 1 </option>
+                        <option value="2"> 2 </option>
+                        <option value="3"> 3 </option>
+                        <option value="4"> 4 </option>
+                        <option value="5"> 5 </option>
+                        <option value="6"> 6 </option>
+                        <option value="7"> 7 </option>
+                        <option value="8"> 8 </option>
+                        <option value="9"> 9 </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4 col-lg-4 col-sm-4">
+                    <label><b>Tipo</b></label>
+                    <select formControlName="tipo" class="form-control select-color" [ngClass]="displayFieldCss('tipo')" placeholder="Seleccionar...">
+                        <option selected value="">Seleccionar ...</option>
+                        <option value="B">Básica </option>
+                        <option value="C">Contigua </option>
+                        <option value="E">Especial </option>
+                    </select>
+                </div>
+                </div>
             </div>
         </div>
         <div class="flex flex-column">

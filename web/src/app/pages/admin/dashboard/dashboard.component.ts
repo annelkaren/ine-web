@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Documento } from 'src/app/shared/api-objects/documento';
-import { ErrorResponse } from 'src/app/shared/api-objects/error-response';
-import { DocumentoService } from 'src/app/shared/services/documento-service';
-import { ToastService } from 'src/app/shared/services/toast-service';
-import { printDoughnutChart, printLeaveReportChart } from '../../../../assets/js/graphics.js'
-import { Counter } from 'src/app/shared/api-objects/counter.js';
-import { ModalService } from 'src/app/shared/services/modal-service';
-import { DynamicDialogRef } from 'primeng/dynamicdialog/dynamicdialog-ref.js';
+import { Documento } from '../../../shared/api-objects/documento';
+import { ErrorResponse } from '../../../shared/api-objects/error-response';
+import { DocumentoService } from '../../../shared/services/documento-service';
+import { ToastService } from '../../../shared/services/toast-service';
+import { printDoughnutChart, printLeaveReportChart, printPieChart } from '../../../../assets/js/graphics.js'
+import { Counter } from '../../../shared/api-objects/counter.js';
+import { ModalService } from '../../../shared/services/modal-service';
 import { Router } from '@angular/router';
-import { Data } from 'src/app/shared/api-objects/data.js';
+import { Data } from '../../../shared/api-objects/data.js';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-dashboard',
@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
     this.documentoService.counter()
       .subscribe(response => {
         this.counterO = response;
-        printDoughnutChart(this.counterO.noIniciado, this.counterO.captura1, this.counterO.validado);
+        printDoughnutChart(this.counterO.noIniciado, this.counterO.validado);
       },
         (errorResponse: ErrorResponse) => {
           this.toastService.showErrorToast(errorResponse.error);
@@ -100,7 +100,8 @@ export class DashboardComponent implements OnInit {
     this.documentoService.graphic()
       .subscribe(response => {
         this.data = response;
-        printLeaveReportChart(this.data.pan, this.data.pri, this.data.prd, this.data.morena, this.data.alianza, this.data.ci);
+        printLeaveReportChart(this.data.pan, this.data.pri, this.data.prd, this.data.pt, this.data.pv, this.data.mc, this.data.psi, this.data.morena, this.data.alianza, this.data.fm, this.data.col1, this.data.col2);
+        printPieChart(this.data.pan, this.data.pri, this.data.prd, this.data.pt, this.data.pv, this.data.mc, this.data.psi, this.data.morena, this.data.alianza, this.data.fm, this.data.col1, this.data.col2);
       },
         (errorResponse: ErrorResponse) => {
           this.toastService.showErrorToast(errorResponse.error);
@@ -145,5 +146,9 @@ export class DashboardComponent implements OnInit {
         (errorResponse: ErrorResponse) => {
           this.toastService.showErrorToast(errorResponse.error);
         });
+  }
+
+  public verMas(): void {
+    this.modalService.showMore();
   }
 }

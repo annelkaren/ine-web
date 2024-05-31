@@ -5,6 +5,7 @@ import {
 import { AddComponent } from "src/app/pages/shared/modals/add/add.component";
 import { NoValidComponent } from "src/app/pages/shared/modals/no-valid/no-valid.component";
 import { ValidateComponent } from "src/app/pages/shared/modals/validate/validate.component";
+import { CasillaComponent } from "../../pages/shared/modals/casilla/casilla.component";
 
 @Injectable()
 export class ModalService {
@@ -31,6 +32,13 @@ export class ModalService {
         return this.dialog.open(ValidateComponent, {
             header: "Validar formulario",
             width: '40%',
+        });
+    }
+
+    public showMore(): DynamicDialogRef {
+        return this.dialog.open(CasillaComponent, {
+            header: "Listado de casillas",
+            width: '60%',
         });
     }
 }

@@ -26,6 +26,9 @@ import {
 import { FormularioService } from './shared/services/formulario-service';
 import { NoValidComponent } from './pages/shared/modals/no-valid/no-valid.component';
 import { ValidateComponent } from './pages/shared/modals/validate/validate.component';
+import { SeccionService } from './shared/services/seccion-service';
+import { CasillaService } from './shared/services/casilla-service';
+import { CasillaComponent } from './pages/shared/modals/casilla/casilla.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { ValidateComponent } from './pages/shared/modals/validate/validate.compo
     SpinnerComponent,
     AddComponent,
     NoValidComponent,
-    ValidateComponent
+    ValidateComponent,
+    CasillaComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,9 @@ import { ValidateComponent } from './pages/shared/modals/validate/validate.compo
     MessageService,
     DialogService,
     ModalService,
-    FormularioService
+    FormularioService,
+    SeccionService,
+    CasillaService
   ],
   bootstrap: [AppComponent]
 })

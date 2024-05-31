@@ -14,6 +14,9 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DividerModule } from 'primeng/divider';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 @NgModule({
   exports: [
@@ -30,7 +33,9 @@ import { DividerModule } from 'primeng/divider';
     FileUploadModule,
     ImageModule,
     InputNumberModule,
-    DividerModule
+    DividerModule,
+    DropdownModule,
+    InputTextModule
   ]
 })
 export class PrimeNgModule { }

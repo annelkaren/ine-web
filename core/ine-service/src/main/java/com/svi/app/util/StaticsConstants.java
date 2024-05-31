@@ -13,6 +13,8 @@ public class StaticsConstants {
 	public static final String USER_NOT_FOUND = "E004";
 	public static final String INCORRECT_LOGIN = "E005";
 	public static final String DUPLICATED_KEY = "E006";
+	public static final String CASILLA_NOT_FOUND = "E007";
+	public static final String INVALID_KEY = "E008";
 
 	public static final String SAVED_MESSAGE = "I001";
 

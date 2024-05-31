@@ -12,3 +12,7 @@
     padding: 0.5rem 1.25rem !important;
     font-size: .9rem !important;
 }
+
+:host ::ng-deep .row-accessories {
+    background-color: rgba(255, 0, 0, 0.15) !important;
+}

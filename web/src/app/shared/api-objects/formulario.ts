@@ -1,26 +1,23 @@
 export class Formulario {
     constructor(
         public id: number | undefined,
-        public docId: number,
+        public docId: number  | undefined,
         public pan: string,
         public pri: string, 
         public prd: string, 
+        public pt: string,
+        public pv: string,
+        public mc: string,
+        public psi: string,
         public morena: string,
         public alianza: string,
-        public ci: string,
+        public fm: string,
         public col1: string,
         public col2: string,
         public col3: string,
         public col4: string,
-        public col5: string,
-        public col6: string,
-        public col7: string,
-        public col8: string,
-        public col9: string,
-        public col10: string,
-        public col11: string,
-        public col12: string,
         public nulos: string,
         public total: string,
+        public counter: number
     ) { }
 }

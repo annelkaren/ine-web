@@ -5,6 +5,7 @@ export class Documento {
         public clave: string,
         public url: string, 
         public estatus: string, 
-        public isVoice: boolean
+        public isVoice: boolean,
+        public counter: number
     ) { }
 }

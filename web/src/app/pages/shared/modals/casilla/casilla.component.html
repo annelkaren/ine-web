@@ -1,0 +1,21 @@
+<p-table [value]="casillas" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Seccion</th>
+            <th>Casilla Básica</th>
+            <th>Casilla Contigua</th>
+            <th>Casilla Especial</th>
+            <th>Finalizada</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-casilla>
+        <tr>
+            <td>{{ casilla.seccion }} </td>
+            <td>{{ casilla.casillab }}</td>
+            <td>{{ casilla.casillac }}</td>
+            <td>{{ casilla.casillae }}</td>
+            <td *ngIf="!casilla.terminada"><i style="font-size: 1.5em;" class="mdi mdi-close"></i></td>
+            <td *ngIf="casilla.terminada"><i style="font-size: 1.5em;" class="mdi mdi-check"></i></td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -7,6 +7,8 @@ import { ErrorResponse } from 'src/app/shared/api-objects/error-response';
 import { DocumentoService } from 'src/app/shared/services/documento-service';
 import { ToastService } from 'src/app/shared/services/toast-service';
 import { displayFieldCss, getErrorMessage } from 'src/app/shared/utility-functions';
+import { SeccionService } from '../../../../shared/services/seccion-service';
+import { Seccion } from '../../../../shared/api-objects/seccion';
 
 @Component({
   selector: 'app-add',
@@ -18,9 +20,11 @@ export class AddComponent implements OnInit {
   @ViewChild('fileUpload') fileUpload: any;
   public isVisible: boolean = false;
   public formControl: FormGroup = new FormGroup({});
-  private documento: Documento = new Documento(undefined, 0, "", "", "1", false);
+  private documento: Documento = new Documento(undefined, 0, "", "", "1", false, 0);
   private file: any;
   public disabledButton: boolean = true;
+  public array: Seccion[] = [];
+  public selectedCity: Seccion | undefined;
 
   constructor(
     private ref: DynamicDialogRef,
@@ -28,16 +32,26 @@ export class AddComponent implements OnInit {
     private documentoService: DocumentoService,
     private toastService: ToastService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private seccionService: SeccionService
   ) { }
 
   ngOnInit(): void {
+
+    this.seccionService.getAll().then(result => {
+      if (result) {
+        this.array = result;
+      }
+    });
+
     this.formControl = this.formBuilder.group({
-      clave: ["", [Validators.required, Validators.minLength(3)]]
+      clave: [0, [Validators.required, Validators.min(1)]],
+      casilla: [0, [Validators.required, Validators.min(1)]],
+      tipo: ["", [Validators.required]]
     });
 
     this.formControl.valueChanges.subscribe(data => {
-      this.documento.clave = data.clave;
+      this.documento.clave = data.clave + data.casilla + data.tipo;
     });
   }
 

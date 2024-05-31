@@ -18,7 +18,7 @@ public interface DocumentoSRV {
 	
 	ResponseDTO<Documento> create(Documento entity) throws DuplicityException;
 	
-	Documento createVoiceDocument();
+	Documento createVoiceDocument(String clave);
 	
 	Documento getById(Integer id);
 }

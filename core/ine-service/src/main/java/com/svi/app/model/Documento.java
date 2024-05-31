@@ -35,4 +35,7 @@ public class Documento {
 
 	@Column(name = "es_voz")
 	private Boolean isVoice;
+	
+	@Column(name = "counter")
+	private int counter;
 }

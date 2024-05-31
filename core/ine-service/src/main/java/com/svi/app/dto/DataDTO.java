@@ -9,7 +9,13 @@ public class DataDTO {
 	private int pan;
 	private int pri;
 	private int prd;
+	private int pt;
+	private int pv;
+	private int mc;
+	private int psi;
 	private int morena;
 	private int alianza;
-	private int ci;
+	private int fm;
+	private int col1;
+	private int col2;
 }

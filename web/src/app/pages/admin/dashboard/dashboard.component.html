@@ -10,7 +10,7 @@
               <div class="tab-content-basic">
                 <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
                   <div class="row">
-                    <div class="col-lg-8 d-flex flex-column">
+                    <div class="col-lg-6 d-flex flex-column">
                       <div class="row flex-grow">
                         <div class="col-12 grid-margin stretch-card">
                           <div class="card card-rounded">
@@ -44,7 +44,7 @@
                                 <p-selectButton (click)="filter()" [options]="stateOptions" [(ngModel)]="value" optionLabel="label" optionValue="value"></p-selectButton>
                               </div>
                               <div class="table-responsive  mt-1">
-                                <p-table [tableStyle]="{ 'min-width': '50rem', 'font-size': '0.9rem' }"
+                                <p-table [tableStyle]="{'font-size': '0.9rem' }"
                                   [value]="documentos" dataKey="id" selectionMode="single"
                                   [(selection)]="selectedDocuments">
                                   <ng-template pTemplate="header">
@@ -66,7 +66,7 @@
                                     </tr>
                                   </ng-template>
                                   <ng-template pTemplate="body" let-document>
-                                    <tr>
+                                    <tr [ngClass]="{'row-accessories': document.counter === 3}">
                                       <!--td>
                                         <p-tableCheckbox [value]="document"></p-tableCheckbox>
                                       </td-->
@@ -93,24 +93,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4 d-flex flex-column">
-                      <div class="row">
-                        <div class="col-12 grid-margin stretch-card">
-                          <div class="card card-rounded">
-                            <div class="card-body">
-                              <div class="row">
-                                <div class="col-lg-12">
-                                  <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4 class="card-title card-title-dash">Reporte por estatus</h4>
-                                  </div>
-                                  <canvas class="my-auto" id="doughnutChart" height="200"></canvas>
-                                  <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    <div class="col-lg-6 d-flex flex-column">
                       <div class="row">
                         <div class="col-12 grid-margin stretch-card">
                           <div class="card card-rounded">
@@ -125,6 +108,34 @@
                                   <div class="mt-3">
                                     <canvas id="leaveReport"></canvas>
                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 grid-margin stretch-card">
+                          <div class="card card-rounded">
+                            <div class="card-body">
+                              <h4 class="card-title card-title-dash">Reporte por partido político</h4>
+                              <canvas id="pieChart"></canvas>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6 grid-margin stretch-card">
+                          <div class="card card-rounded">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-lg-12">
+                                  <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="card-title card-title-dash">Reporte por casillas</h4><br/>
+                                    <i style="font-size: 1.5em;" (click)="verMas()"  class="mdi mdi-open-in-new"></i>
+                                  </div>
+                                  <canvas class="my-auto" id="doughnutChart" height="200"></canvas>
+                                  <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
                                 </div>
                               </div>
                             </div>
