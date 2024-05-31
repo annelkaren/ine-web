@@ -83,7 +83,7 @@ export class TablesComponent implements OnInit {
           if (this.validateForm()) {
             this.updateForm();
           } else {
-            if (this.documento.counter < 3) {
+            if (this.documento.counter < 2) {
               this.formulario.counter = this.documento.counter + 1; 
               this.updateForm();
             } else {
