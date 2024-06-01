@@ -3,7 +3,7 @@ import { Documento } from '../../../shared/api-objects/documento';
 import { ErrorResponse } from '../../../shared/api-objects/error-response';
 import { DocumentoService } from '../../../shared/services/documento-service';
 import { ToastService } from '../../../shared/services/toast-service';
-import { printDoughnutChart, printLeaveReportChart, printPieChart } from '../../../../assets/js/graphics.js'
+import { printCasilla50, printCasilla60, printCasilla70, printCasilla80, printDoughnutChart, printLeaveReportChart, printPieChart } from '../../../../assets/js/graphics.js'
 import { Counter } from '../../../shared/api-objects/counter.js';
 import { ModalService } from '../../../shared/services/modal-service';
 import { Router } from '@angular/router';
@@ -27,6 +27,10 @@ export class DashboardComponent implements OnInit {
   public page: number = 0;
   private counterO!: Counter;
   private data!: Data;
+  public c50: boolean = false;
+  public c60: boolean = false;
+  public c70: boolean = false;
+  public c80: boolean = false;
   public stateOptions: any[] = [{ label: 'Todos', value: 1 }, { label: 'Documento', value: 2 }, { label: 'Voz', value: 3 }];
   public value: number = 1;
 
@@ -42,6 +46,7 @@ export class DashboardComponent implements OnInit {
     this.getAll(0);
     this.counter();
     this.graphic();
+    this.casillas();
   }
 
   public add(): void {
@@ -80,7 +85,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public editar(document: any): void {
-    if(!document.isVoice && document.estatus != '4') {
+    if (!document.isVoice && document.estatus != '4') {
       this.router.navigate(['/form/', document.id]);
     }
   }
@@ -102,6 +107,40 @@ export class DashboardComponent implements OnInit {
         this.data = response;
         printLeaveReportChart(this.data.pan, this.data.pri, this.data.prd, this.data.pt, this.data.pv, this.data.mc, this.data.psi, this.data.morena, this.data.alianza, this.data.fm, this.data.col1, this.data.col2);
         printPieChart(this.data.pan, this.data.pri, this.data.prd, this.data.pt, this.data.pv, this.data.mc, this.data.psi, this.data.morena, this.data.alianza, this.data.fm, this.data.col1, this.data.col2);
+      },
+        (errorResponse: ErrorResponse) => {
+          this.toastService.showErrorToast(errorResponse.error);
+        });
+  }
+
+  public casillas(): void {
+    this.documentoService.casillas()
+      .subscribe(response => {
+        console.log(response);
+        this.c50 = response.casilla50.terminado;
+        this.c60 = response.casilla60.terminado;
+        this.c70 = response.casilla70.terminado;
+        this.c80 = response.casilla80.terminado;
+        if (response.casilla50.data) {
+          printCasilla50(response.casilla50.data.pan, response.casilla50.data.pri, response.casilla50.data.prd, response.casilla50.data.pt, response.casilla50.data.pv, response.casilla50.data.mc, response.casilla50.data.psi, response.casilla50.data.morena, response.casilla50.data.alianza, response.casilla50.data.fm, response.casilla50.data.col1, response.casilla50.data.col2);
+        } else {
+          printCasilla50(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        if (response.casilla60.data) {
+          printCasilla60(response.casilla60.data.pan, response.casilla60.data.pri, response.casilla60.data.prd, response.casilla60.data.pt, response.casilla60.data.pv, response.casilla60.data.mc, response.casilla60.data.psi, response.casilla60.data.morena, response.casilla60.data.alianza, response.casilla60.data.fm, response.casilla60.data.col1, response.casilla60.data.col2);
+        } else {
+          printCasilla60(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        if (response.casilla70.data) {
+          printCasilla70(response.casilla70.data.pan, response.casilla70.data.pri, response.casilla70.data.prd, response.casilla70.data.pt, response.casilla70.data.pv, response.casilla70.data.mc, response.casilla70.data.psi, response.casilla70.data.morena, response.casilla70.data.alianza, response.casilla70.data.fm, response.casilla70.data.col1, response.casilla70.data.col2);
+        } else {
+          printCasilla70(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        if (response.casilla80.data) {
+          printCasilla80(response.casilla80.data.pan, response.casilla80.data.pri, response.casilla80.data.prd, response.casilla80.data.pt, response.casilla80.data.pv, response.casilla80.data.mc, response.casilla80.data.psi, response.casilla80.data.morena, response.casilla80.data.alianza, response.casilla80.data.fm, response.casilla80.data.col1, response.casilla80.data.col2);
+        } else {
+          printCasilla80(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
       },
         (errorResponse: ErrorResponse) => {
           this.toastService.showErrorToast(errorResponse.error);

@@ -3,6 +3,7 @@ package com.svi.app.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.svi.app.model.Casilla;
@@ -11,8 +12,10 @@ import com.svi.app.model.Casilla;
 public interface CasillaRepository extends JpaRepository<Casilla, Integer> {
 
 	Casilla findBySeccionAndCasillabAndCasillacAndCasillae(int seccion, int b, int c, int e);
-	
-	long countByTerminada(Boolean terminada); 
-	
+
+	long countByTerminada(Boolean terminada);
+
 	List<Casilla> findAllByOrderBySeccionAscCasillabDescCasillacAsc();
+
+	List<Casilla> findDistinctByPrioridad(int prioridad);
 }

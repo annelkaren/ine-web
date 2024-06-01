@@ -18,4 +18,5 @@ public class DataDTO {
 	private int fm;
 	private int col1;
 	private int col2;
+	private String clave;
 }

@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.svi.app.dto.DataDTO;
 import com.svi.app.dto.ResponseDTO;
+import com.svi.app.dto.ResultsDTO;
 import com.svi.app.model.Formulario;
 import com.svi.app.service.FormularioSRV;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin
 @RestController
 @RequestMapping("/formulario")
 public class FormularioController {
@@ -62,5 +63,11 @@ public class FormularioController {
 			LOG.error("create", ex);
 			return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@GetMapping(value = "/casillas")
+	@ResponseBody
+	public ResultsDTO casillas() {
+		return this.formularioSRV.getByCasilla();
 	}
 }

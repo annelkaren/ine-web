@@ -36,4 +36,8 @@ public class Casilla {
 	
 	@Column(name = "terminada")
 	private boolean terminada;
+	
+	
+	@Column(name = "prioridad")
+	private int prioridad;
 }

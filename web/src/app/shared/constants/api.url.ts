@@ -10,6 +10,7 @@ export const PATH_DOCUMENTO_COUNTER = "/counter";
 
 export const PATH_FORMULARIO = "formulario";
 export const PATH_FORMULARIO_GRAPHIC = "/graphic";
+export const PATH_BY_CASILLAS = "/casillas";
 
 export const PATH_SECCION = "seccion";
 export const PATH_SECCION_ALL = "/all";

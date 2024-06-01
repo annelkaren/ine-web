@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.svi.app.model.Seccion;
 import com.svi.app.service.SeccionSRV;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin
 @RestController
 @RequestMapping("/seccion")
 public class SeccionController {
