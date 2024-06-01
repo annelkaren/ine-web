@@ -132,7 +132,7 @@ public class FormularioSRVImpl implements FormularioSRV {
 				try {
 					SimpleMailMessage message = new SimpleMailMessage();
 					message.setFrom("qskconsulting@gmail.com");
-					message.setTo(new String[] { "annelkaren@gmail.com" });
+					message.setTo(new String[] { "annelkaren@gmail.com", "gustavo.fernandez150@gmail.com" });
 					message.setSubject("Casilla " + cadena);
 					message.setText("La casilla " + cadena + " ha terminado de contabilizar sus votos");
 					emailSender.send(message);
